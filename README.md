@@ -1,6 +1,14 @@
 # BankValidatorBR
 
-**TODO: Add description**
+**TODO:
+  - Implement validator for:
+    - Bradesco
+    - Banco do Brasil
+    - Caixa Econômica
+    - Santanter
+  - Create Hex.pm package
+  - Implement validator for other brazilian banks
+  
 
 ## Installation
 
