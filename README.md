@@ -1,5 +1,7 @@
 # BankValidatorBR
 
+[![SourceLevel](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br.svg)](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br)
+
 ## TODO:
   - Implement validator for:
     - Bradesco
