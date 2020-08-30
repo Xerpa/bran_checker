@@ -1,8 +1,10 @@
-defmodule BankValidatorBR.Itau do
+defmodule BankValidatorBR.Banks.Itau do
   alias BankValidatorBR.DigitCalculator
 
+  import BankValidatorBR.Banks.Util
+
   @moduledoc """
-    Documentation `BankValidatorBR.Itau`
+    Documentation `BankValidatorBR.Banks.Itau`
   """
 
   @weigths [2, 1, 2, 1, 2, 1, 2, 1, 2]
@@ -20,13 +22,11 @@ defmodule BankValidatorBR.Itau do
          true <- is_valid_account_number?(account_number) do
       digit_result = DigitCalculator.mod(agency_number ++ account_number, 10, @weigths, true)
 
-      IO.puts("digit: #{inspect(digit_result)}")
       digit_result === 10 || digit_result == digit
     else
       _ -> false
     end
   end
 
-  defp is_valid_agency_number?(agency_number), do: length(agency_number) == 4
   defp is_valid_account_number?(account_number), do: length(account_number) == 5
 end

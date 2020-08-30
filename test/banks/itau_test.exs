@@ -1,9 +1,9 @@
-defmodule BankValidatorBR.ItauTest do
-  alias BankValidatorBR.Itau
+defmodule BankValidatorBR.Banks.ItauTest do
+  alias BankValidatorBR.Banks.Itau
 
   use ExUnit.Case
 
-  describe "BankValidatorBR.ItauTest" do
+  describe "BankValidatorBR.Banks.ItauTest" do
     test("should return true when the account is valid") do
       assert Itau.is_valid?([2, 5, 4, 5], [0, 2, 3, 6, 6], 1) == true
     end
