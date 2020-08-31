@@ -1,6 +1,6 @@
 # BankValidatorBR
 
-[![SourceLevel](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br.svg)](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br)
+[![SourceLevel](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br.svg)](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br) [![Coverage Status](https://coveralls.io/repos/github/itsmegrave/bank_validator_br/badge.svg?branch=master)](https://coveralls.io/github/itsmegrave/bank_validator_br?branch=master)
 
 ## TODO:
 
