@@ -1,18 +1,18 @@
 # BankValidatorBR
 
-[![SourceLevel](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br.svg)](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br) [![Coverage Status](https://coveralls.io/repos/github/itsmegrave/bank_validator_br/badge.svg?branch=master)](https://coveralls.io/github/itsmegrave/bank_validator_br?branch=master)
+![Elixir CI](https://github.com/itsmegrave/bank_validator_br/workflows/Elixir%20CI/badge.svg)[![SourceLevel](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br.svg)](https://app.sourcelevel.io/github/itsmegrave/bank_validator_br) [![Coverage Status](https://coveralls.io/repos/github/itsmegrave/bank_validator_br/badge.svg?branch=master)](https://coveralls.io/github/itsmegrave/bank_validator_br?branch=master)
 
 ## TODO:
 
--Implement validator for:
-  -Bradesco
-  -Banco do Brasil
-  -Caixa Econômica
-  -~~Santanter~~
--Create Hex.pm package
--Implement validator for other brazilian banks
--Improve documentations
--Add tests
+\-Implement validator for:
+  \-Bradesco
+  \-Banco do Brasil
+  \-Caixa Econômica
+  \-~~Santanter~~
+\-Create Hex.pm package
+\-Implement validator for other brazilian banks
+\-Improve documentations
+\-Add tests
 
 ## Installation
 
