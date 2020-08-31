@@ -1,16 +1,16 @@
 # BankValidatorBR
 
 ## TODO:
-  - Implement validator for:
-    - Bradesco
-    - Banco do Brasil
-    - Caixa Econômica
-    - ~~Santanter~~
-  - Create Hex.pm package
-  - Implement validator for other brazilian banks
-  - Improve documentations
-  - Add tests
 
+-Implement validator for:
+  -Bradesco
+  -Banco do Brasil
+  -Caixa Econômica
+  -~~Santanter~~
+-Create Hex.pm package
+-Implement validator for other brazilian banks
+-Improve documentations
+-Add tests
 
 ## Installation
 
@@ -27,4 +27,4 @@ end
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/bank_validator_br](https://hexdocs.pm/bank_validator_br).
+be found at <https://hexdocs.pm/bank_validator_br>.
