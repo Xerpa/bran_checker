@@ -2,14 +2,15 @@ name: Elixir CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+    - master
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
 
 jobs:
-  build:
-
-    name: Build and test
+  build_and_test:
+    name: Build and Test
     runs-on: ubuntu-latest
     env:
       MIX_ENV: test
@@ -33,3 +34,14 @@ jobs:
       run: mix credo
     - name: Run Tests
       run: mix coveralls.github
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    env:
+      MIX_ENV: prod
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Publish
+    ## TODO: Just a test atm
+      run: echo Published after tests
