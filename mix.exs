@@ -46,6 +46,7 @@ defmodule BankValidatorBR.MixProject do
     [
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:junit_formatter, "~> 3.1", only: :test, runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
   end

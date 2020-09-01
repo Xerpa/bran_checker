@@ -24,6 +24,8 @@ jobs:
       - run:
           name: Run tests, reporting code coverage
           command: mix coveralls.circle
+      - store_test_results:  # upload junit test results for display in Test Summary
+          path: _build/test/lib
       - run: mix credo
 
 workflows:
