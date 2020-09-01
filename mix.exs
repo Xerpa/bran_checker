@@ -15,7 +15,22 @@ defmodule BankValidatorBR.MixProject do
         "coveralls.github": :test,
         "coveralls.post": :test,
         "coveralls.html": :test
-      ]
+      ],
+      description: description(),
+      package: package(),
+      source_url: "https://github.com/Xerpa/bank_validator_br"
+    ]
+  end
+
+  defp description() do
+    "Elixir package to validate bank account numbers of Brazilian banks."
+  end
+
+  defp package() do
+    [
+      name: "BankValidatorBR",
+      links: %{"GitHub" => "https://github.com/Xerpa/bank_validator_br"},
+      licences: ["MIT"]
     ]
   end
 
