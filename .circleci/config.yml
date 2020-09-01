@@ -2,14 +2,21 @@ version: 2.1
 jobs:
   build_and_test:
     docker:
-      - image: circleci/elixir:1.8
+      - image: hexpm/elixir:1.8.2-erlang-22.3.4.10-alpine-3.12.0
         environment:
           MIX_ENV: test
 
     working_directory: ~/repo
     steps:
       - checkout
-      - run: mix deps.get
+      - run:
+          name: Install dependencies
+          command: |
+            mix local.hex --force
+            mix local.rebar --force
+            mix deps.get
+      - run: mix format --check-formatted
+      - run: mix compile --warnings-as-errors
       - run: mix test
       - run: mix credo
       - run:
