@@ -19,10 +19,12 @@ jobs:
       - run: mix compile --warnings-as-errors
       - run: mix test
       - run: mix credo
-      - run:
-          command: mix coveralls.github
-          environment:
-            GITHUB_TOKEN: ${GITHUB_TOKEN}
+
+      - run: mix coveralls
+      # - run:
+      #     command: mix coveralls.github
+      #     environment:
+      #       GITHUB_TOKEN: ${GITHUB_TOKEN}
 
 workflows:
   version: 2.1
