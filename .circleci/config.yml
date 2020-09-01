@@ -20,15 +20,12 @@ jobs:
             mix deps.get
       - run: mix format --check-formatted
       - run: mix compile --warnings-as-errors
-      - run: mix test
+      - run:
+          name: Run tests, reporting code coverage
+          command: |
+            apk add git
+            mix coveralls.circle
       - run: mix credo
-
-      - run: mix coveralls
-      # TODO: `GITHUB_TOKEN` should be added to `bank_validator_br` CircleCI context before uncommenting the following step
-      # - run:
-      #     command: mix coveralls.github
-      #     environment:
-      #       GITHUB_TOKEN: ${GITHUB_TOKEN}
 
 workflows:
   version: 2.1
