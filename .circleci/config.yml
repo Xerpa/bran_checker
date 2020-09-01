@@ -11,6 +11,7 @@ jobs:
 
     working_directory: ~/repo
     steps:
+      - run: apk add git
       - checkout
       - run:
           name: Install dependencies
@@ -22,9 +23,7 @@ jobs:
       - run: mix compile --warnings-as-errors
       - run:
           name: Run tests, reporting code coverage
-          command: |
-            apk add git
-            mix coveralls.circle
+          command: mix coveralls.circle
       - run: mix credo
 
 workflows:
