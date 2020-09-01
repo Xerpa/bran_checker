@@ -3,7 +3,7 @@ name: Elixir CI
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
       - master
@@ -16,32 +16,31 @@ jobs:
       MIX_ENV: test
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Elixir
-      uses: actions/setup-elixir@v1
-      with:
-        elixir-version: '1.8' # Define the elixir version [required]
-        otp-version: '20' # Define the OTP version [required]
-    - name: Restore dependencies cache
-      uses: actions/cache@v2
-      with:
-        path: deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
-    - name: Install dependencies
-      run: mix deps.get
-    - name: Run credo
-      run: mix credo
-    - name: Run Tests
-      run: mix coveralls.github
+      - uses: actions/checkout@v2
+      - name: Set up Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          elixir-version: "1.8" # Define the elixir version [required]
+          otp-version: "20" # Define the OTP version [required]
+      - name: Restore dependencies cache
+        uses: actions/cache@v2
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get
+      - name: Run credo
+        run: mix credo
+      - name: Run Tests
+        run: mix coveralls.github
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: build_and_test
     runs-on: ubuntu-latest
     env:
       MIX_ENV: prod
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - name: Publish
-    ## TODO: Just a test atm
-      run: echo Published after tests
+      - name: Publish
+        ## TODO: Just a test atm
+        run: echo Published after tests
