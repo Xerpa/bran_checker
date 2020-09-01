@@ -30,7 +30,7 @@ defmodule BankValidatorBR.MixProject do
     [
       name: "BankValidatorBR",
       links: %{"GitHub" => "https://github.com/Xerpa/bank_validator_br"},
-      licences: ["MIT"]
+      licenses: ["MIT"]
     ]
   end
 
