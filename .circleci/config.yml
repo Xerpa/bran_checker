@@ -24,6 +24,7 @@ jobs:
       - run: mix credo
 
       - run: mix coveralls
+      # TODO: `GITHUB_TOKEN` should be added to `bank_validator_br` CircleCI context before uncommenting the following step
       # - run:
       #     command: mix coveralls.github
       #     environment:
