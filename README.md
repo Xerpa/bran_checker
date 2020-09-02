@@ -4,7 +4,7 @@
 
 This rules are based on [this document](http://177.153.6.25/ercompany.com.br/boleto/laravel-boleto-master/manuais/Regras%20Validacao%20Conta%20Corrente%20VI_EPS.pdf)
 
-## TODO:
+## Next steps:
 
 -   Implement validator for:
     -   Bradesco
