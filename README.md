@@ -6,15 +6,15 @@ This rules are based on [this document](http://177.153.6.25/ercompany.com.br/bol
 
 ## TODO:
 
-- Implement validator for:
-  - Bradesco
-  - Banco do Brasil
-  - Caixa Econômica
-  - ~~Santanter~~
-- Create Hex.pm package
-- Implement validator for other brazilian banks
-- Improve documentations
-- Add tests
+-   Implement validator for:
+    -   Bradesco
+    -   Banco do Brasil
+    -   Caixa Econômica
+    -   ~~Santanter~~
+-   Create Hex.pm package
+-   Implement validator for other brazilian banks
+-   Improve documentations
+-   Add tests
 
 ## Installation
 
