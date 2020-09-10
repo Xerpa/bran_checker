@@ -46,9 +46,5 @@ defmodule BankValidatorBR.Banks.SantanderTest do
     test("should return false when the account number starts with invalid operation") do
       assert Santander.is_valid?([0, 0, 6, 0], [9, 9, 0, 9, 8, 4, 8, 6], 0) == false
     end
-
-    test "test" do
-      assert Santander.is_valid?([0, 2, 3, 8], [3, 7, 3, 6, 1, 9, 5, 2], 9) == true
-    end
   end
 end
