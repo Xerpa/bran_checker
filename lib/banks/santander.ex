@@ -43,12 +43,13 @@ defmodule BankValidatorBR.Banks.Santander do
          true <- is_valid_account_type?(account_number) do
       full_account_number = agency_number ++ [0, 0] ++ account_number
 
-      digit_result =
+      validating_digit =
         full_account_number
         |> DigitCalculator.calc_numbers(@weigths, false)
         |> rem(10)
+        |> calc_digit()
 
-      digit_result == digit
+      validating_digit == digit
     else
       _ -> false
     end
@@ -64,4 +65,7 @@ defmodule BankValidatorBR.Banks.Santander do
 
     Enum.member?(@account_types, account_type)
   end
+
+  defp calc_digit(digit) when digit == 0, do: digit
+  defp calc_digit(digit), do: 10 - digit
 end
