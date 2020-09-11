@@ -30,20 +30,6 @@ defmodule BankValidatorBRTest do
         {"033", "4774", "137027053"}
       ]
     end
-
-    test_with_params "returns an error when digit is not a number",
-                     fn bank_code, agency, account ->
-                       assert_raise ArgumentError, "Invalid account number format", fn ->
-                         BankValidatorBR.is_valid?(bank_code, agency, account)
-                       end
-                     end do
-      [
-        {"341", "7062", "14945X"},
-        {"341", "7066", "62266-X"},
-        {"033", "0996", "09818292X"},
-        {"033", "0238", "37361952-X"}
-      ]
-    end
   end
 
   describe "is_valid?/4" do
@@ -73,29 +59,5 @@ defmodule BankValidatorBRTest do
         {"033", "4774", "13702705", 5}
       ]
     end
-
-    test_with_params "raises an error for unimplemented bank validation",
-                     fn bank_code, agency, account, digit ->
-                       assert_raise RuntimeError, "Bank #{bank_code} is not supported", fn ->
-                         BankValidatorBR.is_valid?(bank_code, agency, account, digit) == false
-                       end
-                     end do
-      [
-        {"123", "7066", "62266", 2},
-        {"456", "4774", "13702705", 5}
-      ]
-    end
-  end
-
-  test_with_params "returns an error when digit is not a number",
-                   fn bank_code, agency, account, digit ->
-                     assert_raise ArgumentError, "Invalid account number format", fn ->
-                       BankValidatorBR.is_valid?(bank_code, agency, account, digit)
-                     end
-                   end do
-    [
-      {"341", "7062", "14945", "X"},
-      {"033", "0996", "09818292", "X"}
-    ]
   end
 end

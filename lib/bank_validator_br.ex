@@ -33,10 +33,6 @@ defmodule BankValidatorBR do
     end
   end
 
-  def is_valid?(_bank_code, _agency_code, _account, _digit) do
-    raise ArgumentError, message: "Invalid account number format"
-  end
-
   def is_valid?(bank_code, agency_code, account_with_digit) do
     {account, digit} = split_account_and_digit(account_with_digit)
 
@@ -49,13 +45,9 @@ defmodule BankValidatorBR do
       |> String.replace("-", "")
       |> String.split_at(-1)
 
-    case Integer.parse(digit) do
-      {parsed_digit, _} ->
-        {account, parsed_digit}
+    {parsed_digit, _} = Integer.parse(digit)
 
-      :error ->
-        raise ArgumentError, message: "Invalid account number format"
-    end
+    {account, parsed_digit}
   end
 
   defp parse_to_integer_list(numbers) do
