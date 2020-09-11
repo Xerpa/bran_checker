@@ -20,9 +20,12 @@ defmodule BankValidatorBR.Banks.Itau do
   def is_valid?(agency_number, account_number, digit) do
     with true <- is_valid_agency_number?(agency_number),
          true <- is_valid_account_number?(account_number) do
-      digit_result = DigitCalculator.mod(agency_number ++ account_number, 10, @weigths, true)
+      digit_result =
+        (agency_number ++ account_number)
+        |> DigitCalculator.mod(10, @weigths, true)
+        |> rem(10)
 
-      digit_result === 10 || digit_result == digit
+      digit_result == digit
     else
       _ -> false
     end
