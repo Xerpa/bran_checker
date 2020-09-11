@@ -7,7 +7,7 @@ defmodule BankValidatorBR.Banks.ItauTest do
   describe "BankValidatorBR.Banks.ItauTest" do
     test_with_params "should return true when the account is valid",
                      fn agency, account, digit ->
-                       assert Itau.is_valid?(agency, account, digit) == true
+                       assert Itau.is_valid?(agency, account, digit)
                      end do
       [
         {[4, 3, 1, 3], [4, 3, 1, 2, 9], 0},
