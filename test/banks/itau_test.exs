@@ -42,19 +42,19 @@ defmodule BankValidatorBR.Banks.ItauTest do
     end
 
     test("should return false when the agency number have less than 4 digits") do
-      assert Itau.is_valid?([2, 5, 4], [0, 2, 3, 6, 6], 1) == false
+      refute Itau.is_valid?([2, 5, 4], [0, 2, 3, 6, 6], 1)
     end
 
     test("should return false when the agency number have more than 4 digits") do
-      assert Itau.is_valid?([2, 5, 4, 5, 5], [0, 2, 3, 6, 6], 1) == false
+      refute Itau.is_valid?([2, 5, 4, 5, 5], [0, 2, 3, 6, 6], 1)
     end
 
     test("should return false when the account number have less than 5 digits") do
-      assert Itau.is_valid?([2, 5, 4], [0, 2, 3, 6], 1) == false
+      refute Itau.is_valid?([2, 5, 4], [0, 2, 3, 6], 1)
     end
 
     test("should return false when the account number have more than 6 digits") do
-      assert Itau.is_valid?([2, 5, 4, 5], [0, 2, 3, 6, 6, 6], 1) == false
+      refute Itau.is_valid?([2, 5, 4, 5], [0, 2, 3, 6, 6, 6], 1)
     end
   end
 end
