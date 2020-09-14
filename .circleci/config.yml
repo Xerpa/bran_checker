@@ -28,6 +28,18 @@ jobs:
       - store_test_results:  # upload junit test results for display in Test Summary
           path: _build/test/lib
       - run: mix credo
+  publish:
+    parallelism: 1
+    docker:
+      - image: circleci/elixir:1.9.1
+
+    steps:
+      - checkout
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+      - run: mix deps.get
+      - run: mix hex.organization auth xerpa --key $HEX_AUTH_KEY
+      - run: mix hex.publish --yes
 
 workflows:
   version: 2.1
@@ -43,3 +55,19 @@ workflows:
                 - hexpm/elixir:1.9.4-erlang-20.3.8.26-alpine-3.12.0
                 - hexpm/elixir:1.10.4-erlang-21.3.8.17-alpine-3.12.0
                 - hexpm/elixir:1.10.4-erlang-23.0.3-alpine-3.12.0
+      - publish_production_approval:
+                type: approval
+                filters:
+                  branches:
+                    only:
+                      - master
+                requires:
+                  - build_and_test
+      - publish:
+                context: xerpa
+                filters:
+                  branches:
+                    only:
+                      - master
+                requires:
+                  - publish_production_approval
