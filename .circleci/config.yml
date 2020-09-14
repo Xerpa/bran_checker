@@ -20,6 +20,7 @@ jobs:
             mix local.rebar --force
             mix deps.get
       - run: mix format --check-formatted
+      - run: mix credo --strict
       - run: mix compile --warnings-as-errors
       - run:
           name: Run tests, reporting code coverage
