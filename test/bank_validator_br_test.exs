@@ -5,7 +5,7 @@ defmodule BankValidatorBRTest do
   describe "is_valid?/3" do
     test_with_params "returns true for valid accounts and digits with hyphen",
                      fn bank_code, agency, account ->
-                       assert BankValidatorBR.is_valid?(bank_code, agency, account) == true
+                       assert BankValidatorBR.is_valid?(bank_code, agency, account)
                      end do
       [
         {"341", "7062", "14945-0"},
@@ -19,7 +19,7 @@ defmodule BankValidatorBRTest do
 
     test_with_params "returns true for valid accounts and digits with no hyphen",
                      fn bank_code, agency, account ->
-                       assert BankValidatorBR.is_valid?(bank_code, agency, account) == true
+                       assert BankValidatorBR.is_valid?(bank_code, agency, account)
                      end do
       [
         {"341", "7062", "149450"},
@@ -35,7 +35,7 @@ defmodule BankValidatorBRTest do
   describe "is_valid?/4" do
     test_with_params "returns true when account is valid",
                      fn bank_code, agency, account, digit ->
-                       assert BankValidatorBR.is_valid?(bank_code, agency, account, digit) == true
+                       assert BankValidatorBR.is_valid?(bank_code, agency, account, digit)
                      end do
       [
         {"341", "7062", "14945", 0},
@@ -49,8 +49,7 @@ defmodule BankValidatorBRTest do
 
     test_with_params "returns false when account isn't valid",
                      fn bank_code, agency, account, digit ->
-                       assert BankValidatorBR.is_valid?(bank_code, agency, account, digit) ==
-                                false
+                       refute BankValidatorBR.is_valid?(bank_code, agency, account, digit)
                      end do
       [
         {"341", "7066", "62266", 2},

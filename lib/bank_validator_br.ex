@@ -16,7 +16,7 @@ defmodule BankValidatorBR do
   """
 
   @spec is_valid?(String.t(), String.t(), String.t(), Integer.t()) :: Boolean.t()
-  def is_valid?(bank_code, agency_code, account_number, digit) when is_integer(digit) do
+  def is_valid?(bank_code, agency_code, account_number, digit) do
     parsed_agency_code = parse_to_integer_list(agency_code)
 
     parsed_account_number = parse_to_integer_list(account_number)
@@ -45,9 +45,7 @@ defmodule BankValidatorBR do
       |> String.replace("-", "")
       |> String.split_at(-1)
 
-    {parsed_digit, _} = Integer.parse(digit)
-
-    {account, parsed_digit}
+    {account, digit}
   end
 
   defp parse_to_integer_list(numbers) do
