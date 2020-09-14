@@ -1,6 +1,6 @@
-defmodule BankValidatorBR.DigitCalculator do
+defmodule BRAN.DigitCalculator do
   @moduledoc """
-  Documentation for `BankValidatorBR.DigitCalculator`.
+  Documentation for `BRAN.DigitCalculator`.
   """
   @spec calc_numbers([Integer.t()], [Integer.t()], Boolean.t()) :: Integer.t()
   def calc_numbers(account_number, weights, sum_result_when_greater_than_9 \\ false) do

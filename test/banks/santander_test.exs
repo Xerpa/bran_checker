@@ -1,11 +1,11 @@
-defmodule BankValidatorBR.Banks.SantanderTest do
-  alias BankValidatorBR.Banks.Santander
+defmodule BRAN.Banks.SantanderTest do
+  alias BRAN.Banks.Santander
 
   use ExUnit.Case
   use ExUnit.Parameterized
 
-  describe "BankValidatorBR.Banks.SantanderTest" do
-    test_with_params "should return valid tuple when the account is valid",
+  describe "BRAN.Banks.SantanderTest" do
+    test_with_params "should return true when the account is valid",
                      fn agency, account, digit ->
                        assert Santander.validate(agency, account, digit) == {:ok, :valid}
                      end do

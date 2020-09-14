@@ -1,10 +1,10 @@
-defmodule BankValidatorBR.Banks.Itau do
-  alias BankValidatorBR.DigitCalculator
+defmodule BRAN.Banks.Itau do
+  alias BRAN.DigitCalculator
 
-  import BankValidatorBR.Banks.Util
+  import BRAN.Banks.Util
 
   @moduledoc """
-    Documentation `BankValidatorBR.Banks.Itau`
+    Documentation `BRAN.Banks.Itau`
   """
 
   @weigths [2, 1, 2, 1, 2, 1, 2, 1, 2]
@@ -13,7 +13,7 @@ defmodule BankValidatorBR.Banks.Itau do
   Returns a boolean, after checking if the combination of agency_number, account_number and digit is valid
 
   ##Examples
-    iex> BankValidatorBR.Itau.validate([2,5,4,5], [0,2,3,6,6], 1)
+    iex> BRAN.Itau.is_valid?([2,5,4,5], [0,2,3,6,6], 1)
     :true
   """
 

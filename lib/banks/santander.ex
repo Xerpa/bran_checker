@@ -1,10 +1,10 @@
-defmodule BankValidatorBR.Banks.Santander do
-  alias BankValidatorBR.DigitCalculator
+defmodule BRAN.Banks.Santander do
+  alias BRAN.DigitCalculator
 
-  import BankValidatorBR.Banks.Util
+  import BRAN.Banks.Util
 
   @moduledoc """
-    Documentation `BankValidatorBR.Banks.Santander`
+    Documentation `BRAN.Banks.Santander`
   """
 
   @weigths [9, 7, 3, 1, 0, 0, 9, 7, 1, 3, 1, 9, 7, 3]
@@ -33,7 +33,7 @@ defmodule BankValidatorBR.Banks.Santander do
   Returns a boolean, after checking if the combination of agency_number, account_number and digit is valid
 
   ##Examples
-    iex> BankValidatorBR.Santander.validate([2,5,4,5], [0,2,3,6,6,0,2,3], 1)
+    iex> BRAN.Santander.is_valid?([2,5,4,5], [0,2,3,6,6,0,2,3], 1)
     :true
   """
   @spec validate([Integer.t()], Integer.t(), Integer.t() | String.t()) ::
