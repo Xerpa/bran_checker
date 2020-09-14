@@ -1,9 +1,9 @@
-defmodule BankValidatorBR do
-  alias BankValidatorBR.Banks.Itau
-  alias BankValidatorBR.Banks.Santander
+defmodule BRAN do
+  alias BRAN.Banks.Itau
+  alias BRAN.Banks.Santander
 
   @moduledoc """
-  Documentation for `BankValidatorBR`.
+  Documentation for `BRAN`.
   """
 
   @doc """
@@ -11,7 +11,7 @@ defmodule BankValidatorBR do
   Returns a boolean, after checking if the combination of bank_code, agency_number, account_number and digit is valid
 
   ## Examples
-    iex> BankValidatorBR.validate("341","2545", "02366", 1)
+    iex> BRAN.is_valid?("341","2545", "02366", 1)
     :true
   """
   @spec validate(String.t(), String.t(), String.t(), String.t() | Integer.t()) ::

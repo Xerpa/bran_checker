@@ -1,9 +1,9 @@
-defmodule BankValidatorBR.MixProject do
+defmodule BRAN.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :bank_validator_br,
+      app: :bran_checker,
       version: "0.1.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
@@ -18,7 +18,7 @@ defmodule BankValidatorBR.MixProject do
       ],
       description: description(),
       package: package(),
-      source_url: "https://github.com/Xerpa/bank_validator_br"
+      source_url: "https://github.com/Xerpa/bran"
     ]
   end
 
@@ -28,8 +28,8 @@ defmodule BankValidatorBR.MixProject do
 
   defp package() do
     [
-      name: "BankValidatorBR",
-      links: %{"GitHub" => "https://github.com/Xerpa/bank_validator_br"},
+      name: "BRAN Checker",
+      links: %{"GitHub" => "https://github.com/Xerpa/bran"},
       licenses: ["MIT"]
     ]
   end

@@ -1,6 +1,6 @@
-defmodule BankValidatorBR.Banks.Util do
+defmodule BRAN.Banks.Util do
   @moduledoc """
-  Documentation for `BankValidatorBR.Banks.Util`.
+  Documentation for `BRAN.Banks.Util`.
   """
   def validate_agency_code(agency_code) do
     if length(agency_code) == 4 do
