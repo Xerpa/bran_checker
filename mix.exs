@@ -18,7 +18,7 @@ defmodule BRAN.MixProject do
       ],
       description: description(),
       package: package(),
-      source_url: "https://github.com/Xerpa/bran",
+      source_url: "https://github.com/Xerpa/bran_checker",
       docs: [
         main: "readme",
         extras: ["README.md", "LICENSE"]
@@ -33,7 +33,7 @@ defmodule BRAN.MixProject do
   defp package() do
     [
       name: "bran_checker",
-      links: %{"GitHub" => "https://github.com/Xerpa/bran"},
+      links: %{"GitHub" => "https://github.com/Xerpa/bran_checker"},
       licenses: ["MIT"]
     ]
   end

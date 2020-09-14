@@ -31,7 +31,7 @@ jobs:
   publish:
     parallelism: 1
     docker:
-      - image: circleci/elixir:1.9.1
+      - image: circleci/elixir:1.7.3
 
     steps:
       - checkout
