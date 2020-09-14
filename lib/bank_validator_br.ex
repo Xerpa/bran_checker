@@ -6,6 +6,7 @@ defmodule BankValidatorBR do
   Documentation for `BankValidatorBR`.
   """
 
+
   @doc """
   is_valid
   Returns a boolean, after checking if the combination of bank_code, agency_number, account_number and digit is valid
@@ -14,7 +15,14 @@ defmodule BankValidatorBR do
     iex> BankValidatorBR.is_valid?("341","2545", "02366", 1)
     :true
   """
-
+  @spec is_valid(String.t(), String.t(), String.t(), String.t() | Integer.t()) ::
+          {:error,
+           :invalid_account_number_length
+           | :invalid_account_type
+           | :invalid_agency_code_length
+           | :not_supported
+           | :not_valid}
+          | {:ok, :valid}
   def is_valid(bank_code, agency_code, account_number, digit) do
     parsed_agency_code = parse_to_integer_list(agency_code)
 
