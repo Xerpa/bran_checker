@@ -1,4 +1,4 @@
-defmodule BankValidatorBRTest do
+defmodule BRANTest do
   use ExUnit.Case
   use ExUnit.Parameterized
 
@@ -41,8 +41,6 @@ defmodule BankValidatorBRTest do
                                 {:ok, :valid}
                      end do
       [
-        {"341", "7062", "14945", 0},
-        {"341", "7066", "62266", 8},
         {"341", "0658", "71228", 6},
         {"033", "0996", "09818292", 5},
         {"033", "0238", "37361952", 9},
