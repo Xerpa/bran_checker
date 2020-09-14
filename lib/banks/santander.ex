@@ -33,16 +33,22 @@ defmodule BankValidatorBR.Banks.Santander do
   Returns a boolean, after checking if the combination of agency_number, account_number and digit is valid
 
   ##Examples
-    iex> BankValidatorBR.Santander.is_valid?([2,5,4,5], [0,2,3,6,6,0,2,3], 1)
+    iex> BankValidatorBR.Santander.is_valid([2,5,4,5], [0,2,3,6,6,0,2,3], 1)
     :true
   """
-  @spec is_valid?(List.t(), List.t(), Integer.t()) :: Boolean.t()
-  def is_valid?(agency_number, account_number, digit) do
-    with true <- is_valid_agency_number?(agency_number),
-         true <- is_valid_account_number?(account_number),
-         true <- is_valid_account_type?(account_number),
+  @spec is_valid([Integer.t()], Integer.t(), Integer.t() | String.t()) ::
+          {:error,
+           :invalid_account_number_length
+           | :invalid_account_type
+           | :invalid_agency_code_length
+           | :not_valid}
+          | {:ok, :valid}
+  def is_valid(agency_code, account_number, digit) do
+    with {:ok, :valid} <- is_valid_agency_code(agency_code),
+         {:ok, :valid} <- is_valid_account_number(account_number),
+         {:ok, :valid} <- is_valid_account_type(account_number),
          {:ok, parsed_digit} <- is_valid_numeric_digit?(digit) do
-      full_account_number = agency_number ++ [0, 0] ++ account_number
+      full_account_number = agency_code ++ [0, 0] ++ account_number
 
       validating_digit =
         full_account_number
@@ -50,21 +56,35 @@ defmodule BankValidatorBR.Banks.Santander do
         |> rem(10)
         |> calc_digit()
 
-      validating_digit == parsed_digit
+      if validating_digit == parsed_digit do
+        {:ok, :valid}
+      else
+        {:error, :not_valid}
+      end
     else
-      _ -> false
+      result -> result
     end
   end
 
-  defp is_valid_account_number?(account_number), do: length(account_number) == 8
+  defp is_valid_account_number(account_number) do
+    if length(account_number) == 8 do
+      {:ok, :valid}
+    else
+      {:error, :invalid_account_number_length}
+    end
+  end
 
-  defp is_valid_account_type?(account_number) do
+  defp is_valid_account_type(account_number) do
     account_type =
       account_number
       |> Enum.take(2)
       |> Enum.join()
 
-    Enum.member?(@account_types, account_type)
+    if Enum.member?(@account_types, account_type) do
+      {:ok, :valid}
+    else
+      {:error, :invalid_account_type}
+    end
   end
 
   defp calc_digit(digit) when digit == 0, do: digit

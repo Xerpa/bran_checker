@@ -5,9 +5,9 @@ defmodule BankValidatorBR.Banks.SantanderTest do
   use ExUnit.Parameterized
 
   describe "BankValidatorBR.Banks.SantanderTest" do
-    test_with_params "should return true when the account is valid",
+    test_with_params "should return valid tuple when the account is valid",
                      fn agency, account, digit ->
-                       assert Santander.is_valid?(agency, account, digit)
+                       assert Santander.is_valid(agency, account, digit) == {:ok, :valid}
                      end do
       [
         {[0, 0, 9, 2], [4, 6, 5, 3, 5, 4, 9, 5], 0},
@@ -33,32 +33,48 @@ defmodule BankValidatorBR.Banks.SantanderTest do
       ]
     end
 
-    test("should return false when the account is invalid") do
-      refute Santander.is_valid?([0, 0, 6, 0], [0, 2, 3, 6, 5], 1)
+    test("should return not_valid tuple when the account is invalid") do
+      assert Santander.is_valid([0, 0, 6, 0], [0, 1, 0, 9, 8, 4, 8, 6], 1) == {:error, :not_valid}
     end
 
-    test("should return false when the agency number have less than 4 digits") do
-      refute Santander.is_valid?([2, 5, 4], [0, 1, 0, 9, 8, 4, 8, 6], 1)
+    test(
+      "should return invalid_agency_code_length tuple when the agency number have less than 4 digits"
+    ) do
+      assert Santander.is_valid([2, 5, 4], [0, 1, 0, 9, 8, 4, 8, 6], 1) ==
+               {:error, :invalid_agency_code_length}
     end
 
-    test("should return false when the agency number have more than 4 digits") do
-      refute Santander.is_valid?([0, 0, 6, 0, 5], [0, 1, 0, 9, 8, 4, 8, 6], 1)
+    test(
+      "should return invalid_agency_code_length tuple when the agency number have more than 4 digits"
+    ) do
+      assert Santander.is_valid([0, 0, 6, 0, 5], [0, 1, 0, 9, 8, 4, 8, 6], 1) ==
+               {:error, :invalid_agency_code_length}
     end
 
-    test("should return false when the account number have less than 5 digits") do
-      refute Santander.is_valid?([2, 5, 4], [0, 2, 3, 6], 1)
+    test(
+      "should return invalid_account_number_length tuple when the account number have less than 5 digits"
+    ) do
+      assert Santander.is_valid([0, 2, 5, 4], [0, 2, 3, 6], 1) ==
+               {:error, :invalid_account_number_length}
     end
 
-    test("should return false when the account number have more than 6 digits") do
-      refute Santander.is_valid?([0, 0, 6, 0], [0, 1, 0, 9, 8, 4, 8, 6, 6], 0)
+    test(
+      "should return invalid_account_number_length tuple when the account number have more than 6 digits"
+    ) do
+      assert Santander.is_valid([0, 0, 6, 0], [0, 1, 0, 9, 8, 4, 8, 6, 6], 0) ==
+               {:error, :invalid_account_number_length}
     end
 
-    test("should return false when the account number starts with invalid operation") do
-      refute Santander.is_valid?([0, 0, 6, 0], [9, 9, 0, 9, 8, 4, 8, 6], 0)
+    test(
+      "should return invalid_account_type tuple when the account number starts with invalid operation"
+    ) do
+      assert Santander.is_valid([0, 0, 6, 0], [9, 9, 0, 9, 8, 4, 8, 6], 0) ==
+               {:error, :invalid_account_type}
     end
 
-    test("should return false when the digit is a character") do
-      refute Santander.is_valid?([0, 0, 6, 0], [0, 2, 3, 6, 5], "P")
+    test("should return :invalid_account_type tuple when the digit is a character") do
+      assert Santander.is_valid([0, 0, 6, 0], [9, 9, 0, 9, 8, 4, 8, 6], "P") ==
+               {:error, :invalid_account_type}
     end
   end
 end

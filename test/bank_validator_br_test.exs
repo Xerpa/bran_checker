@@ -2,10 +2,11 @@ defmodule BankValidatorBRTest do
   use ExUnit.Case
   use ExUnit.Parameterized
 
-  describe "is_valid?/3" do
-    test_with_params "returns true for valid accounts and digits with hyphen",
+  describe "is_valid/3" do
+    test_with_params "returns {:ok, :valid} for valid accounts and digits with hyphen",
                      fn bank_code, agency, account ->
-                       assert BankValidatorBR.is_valid?(bank_code, agency, account)
+                       assert BankValidatorBR.is_valid(bank_code, agency, account) ==
+                                {:ok, :valid}
                      end do
       [
         {"341", "7062", "14945-0"},
@@ -17,9 +18,10 @@ defmodule BankValidatorBRTest do
       ]
     end
 
-    test_with_params "returns true for valid accounts and digits with no hyphen",
+    test_with_params "returns {:ok, :valid} for valid accounts and digits with no hyphen",
                      fn bank_code, agency, account ->
-                       assert BankValidatorBR.is_valid?(bank_code, agency, account)
+                       assert BankValidatorBR.is_valid(bank_code, agency, account) ==
+                                {:ok, :valid}
                      end do
       [
         {"341", "7062", "149450"},
@@ -32,10 +34,11 @@ defmodule BankValidatorBRTest do
     end
   end
 
-  describe "is_valid?/4" do
-    test_with_params "returns true when account is valid",
+  describe "is_valid/4" do
+    test_with_params "returns {:ok, :valid} when account is valid",
                      fn bank_code, agency, account, digit ->
-                       assert BankValidatorBR.is_valid?(bank_code, agency, account, digit)
+                       assert BankValidatorBR.is_valid(bank_code, agency, account, digit) ==
+                                {:ok, :valid}
                      end do
       [
         {"341", "7062", "14945", 0},
@@ -47,9 +50,10 @@ defmodule BankValidatorBRTest do
       ]
     end
 
-    test_with_params "returns false when account isn't valid",
+    test_with_params "returns {:error, :not_valid} when account isn't valid",
                      fn bank_code, agency, account, digit ->
-                       refute BankValidatorBR.is_valid?(bank_code, agency, account, digit)
+                       assert BankValidatorBR.is_valid(bank_code, agency, account, digit) ==
+                                {:error, :not_valid}
                      end do
       [
         {"341", "7066", "62266", 2},
