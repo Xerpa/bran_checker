@@ -14,8 +14,6 @@ defmodule BankValidatorBR do
     iex> BankValidatorBR.is_valid?("341","2545", "02366", 1)
     :true
   """
-  def is_valid?(_bank_code, _agency_code, _account_number, digit) when is_nil(digit),
-    do: raise("Digit is null")
 
   @spec is_valid?(String.t(), String.t(), String.t(), Integer.t()) :: Boolean.t()
   def is_valid?(bank_code, agency_code, account_number, digit) do
@@ -33,6 +31,21 @@ defmodule BankValidatorBR do
       _ ->
         raise "Bank #{bank_code} is not supported"
     end
+  end
+
+  def is_valid?(bank_code, agency_code, account_with_digit) do
+    {account, digit} = split_account_and_digit(account_with_digit)
+
+    is_valid?(bank_code, agency_code, account, digit)
+  end
+
+  defp split_account_and_digit(account_with_digit) do
+    {account, digit} =
+      account_with_digit
+      |> String.replace("-", "")
+      |> String.split_at(-1)
+
+    {account, digit}
   end
 
   defp parse_to_integer_list(numbers) do

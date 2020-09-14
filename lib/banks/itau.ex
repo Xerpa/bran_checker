@@ -19,13 +19,14 @@ defmodule BankValidatorBR.Banks.Itau do
   @spec is_valid?(List.t(), List.t(), Integer.t()) :: Boolean.t()
   def is_valid?(agency_number, account_number, digit) do
     with true <- is_valid_agency_number?(agency_number),
-         true <- is_valid_account_number?(account_number) do
+         true <- is_valid_account_number?(account_number),
+         {:ok, parsed_digit} <- is_valid_numeric_digit?(digit) do
       digit_result =
         (agency_number ++ account_number)
         |> DigitCalculator.mod(10, @weigths, true)
         |> rem(10)
 
-      digit_result == digit
+      digit_result == parsed_digit
     else
       _ -> false
     end
