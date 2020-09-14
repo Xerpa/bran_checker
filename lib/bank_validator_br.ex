@@ -15,28 +15,35 @@ defmodule BankValidatorBR do
     :true
   """
 
-  @spec is_valid?(String.t(), String.t(), String.t(), Integer.t()) :: Boolean.t()
-  def is_valid?(bank_code, agency_code, account_number, digit) do
+  def is_valid(bank_code, agency_code, account_number, digit) do
     parsed_agency_code = parse_to_integer_list(agency_code)
 
     parsed_account_number = parse_to_integer_list(account_number)
 
     case bank_code do
       "033" ->
-        Santander.is_valid?(parsed_agency_code, parsed_account_number, digit)
+        Santander.is_valid(parsed_agency_code, parsed_account_number, digit)
 
       "341" ->
-        Itau.is_valid?(parsed_agency_code, parsed_account_number, digit)
+        Itau.is_valid(parsed_agency_code, parsed_account_number, digit)
 
       _ ->
-        raise "Bank #{bank_code} is not supported"
+        {:error, :not_supported}
     end
   end
 
-  def is_valid?(bank_code, agency_code, account_with_digit) do
+  @spec is_valid(binary, binary, binary) ::
+          {:error,
+           :invalid_account_number_length
+           | :invalid_account_type
+           | :invalid_agency_code_length
+           | :not_supported
+           | :not_valid}
+          | {:ok, :valid}
+  def is_valid(bank_code, agency_code, account_with_digit) do
     {account, digit} = split_account_and_digit(account_with_digit)
 
-    is_valid?(bank_code, agency_code, account, digit)
+    is_valid(bank_code, agency_code, account, digit)
   end
 
   defp split_account_and_digit(account_with_digit) do

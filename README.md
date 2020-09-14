@@ -9,8 +9,8 @@ This rules are based on [this document](http://177.153.6.25/ercompany.com.br/bol
 -   Implement validator for:
     -   Bradesco
     -   Banco do Brasil
-    -   Caixa Econômica
-    -   ~~Santanter~~
+    -   Caixa Econômica Federal
+    -   ~~Santander~~
 -   Create Hex.pm package
 -   Implement validator for other brazilian banks
 -   Improve documentations
