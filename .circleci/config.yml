@@ -38,7 +38,6 @@ jobs:
       - run: mix local.hex --force
       - run: mix local.rebar --force
       - run: mix deps.get
-      - run: mix hex.user auth --key $HEX_DEPLOY_KEY
       - run: mix hex.publish --yes
 
 workflows:

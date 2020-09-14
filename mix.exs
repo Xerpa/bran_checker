@@ -32,7 +32,7 @@ defmodule BRAN.MixProject do
 
   defp package() do
     [
-      name: "bran_checker",
+      name: "bran",
       links: %{"GitHub" => "https://github.com/Xerpa/bran_checker"},
       licenses: ["MIT"]
     ]
