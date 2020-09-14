@@ -7,7 +7,7 @@ defmodule BankValidatorBR.Banks.ItauTest do
   describe "BankValidatorBR.Banks.ItauTest" do
     test_with_params "should return valid tuple when the account is valid",
                      fn agency, account, digit ->
-                       assert Itau.is_valid(agency, account, digit) == {:ok, :valid}
+                       assert Itau.validate(agency, account, digit) == {:ok, :valid}
                      end do
       [
         {[4, 3, 1, 3], [4, 3, 1, 2, 9], 0},
@@ -35,7 +35,7 @@ defmodule BankValidatorBR.Banks.ItauTest do
 
     test_with_params "should return not_valid tuple when the account is valid",
                      fn agency, account, digit ->
-                       assert Itau.is_valid(agency, account, digit) == {:error, :not_valid}
+                       assert Itau.validate(agency, account, digit) == {:error, :not_valid}
                      end do
       [
         {[4, 3, 1, 3], [4, 3, 1, 2, 9], 9},
@@ -64,32 +64,32 @@ defmodule BankValidatorBR.Banks.ItauTest do
     test(
       "should return invalid_agency_code_length tuple when the agency number have less than 4 digits"
     ) do
-      assert Itau.is_valid([2, 5, 4], [0, 2, 3, 6, 6], 1) == {:error, :invalid_agency_code_length}
+      assert Itau.validate([2, 5, 4], [0, 2, 3, 6, 6], 1) == {:error, :invalid_agency_code_length}
     end
 
     test(
       "should return invalid_agency_code_length tuple when the agency number have more than 4 digits"
     ) do
-      assert Itau.is_valid([2, 5, 4, 5, 5], [0, 2, 3, 6, 6], 1) ==
+      assert Itau.validate([2, 5, 4, 5, 5], [0, 2, 3, 6, 6], 1) ==
                {:error, :invalid_agency_code_length}
     end
 
     test(
       "should return invalid_account_number_length tuple when the account number have less than 5 digits"
     ) do
-      assert Itau.is_valid([2, 2, 5, 4], [0, 2, 3, 6], 1) ==
+      assert Itau.validate([2, 2, 5, 4], [0, 2, 3, 6], 1) ==
                {:error, :invalid_account_number_length}
     end
 
     test(
       "should return invalid_account_number_length tuple when the account number have more than 5 digits"
     ) do
-      assert Itau.is_valid([2, 5, 4, 5], [0, 2, 3, 6, 6, 6], 1) ==
+      assert Itau.validate([2, 5, 4, 5], [0, 2, 3, 6, 6, 6], 1) ==
                {:error, :invalid_account_number_length}
     end
 
     test("should return {:not_valid, :non_numeric_digit} when the digit is a character") do
-      assert Itau.is_valid([8, 5, 4, 9], [7, 4, 0, 1, 1], "P") == {:not_valid, :non_numeric_digit}
+      assert Itau.validate([8, 5, 4, 9], [7, 4, 0, 1, 1], "P") == {:not_valid, :non_numeric_digit}
     end
   end
 end

@@ -2,7 +2,7 @@ defmodule BankValidatorBR.Banks.Util do
   @moduledoc """
   Documentation for `BankValidatorBR.Banks.Util`.
   """
-  def is_valid_agency_code(agency_code) do
+  def validate_agency_code(agency_code) do
     if length(agency_code) == 4 do
       {:ok, :valid}
     else
@@ -10,11 +10,11 @@ defmodule BankValidatorBR.Banks.Util do
     end
   end
 
-  @spec is_valid_numeric_digit?(String.t() | Integer.t()) ::
+  @spec validate_numeric_digit?(String.t() | Integer.t()) ::
           {:not_valid, :non_numeric_digit} | {:ok, integer}
-  def is_valid_numeric_digit?(digit) when is_integer(digit), do: {:ok, digit}
+  def validate_numeric_digit?(digit) when is_integer(digit), do: {:ok, digit}
 
-  def is_valid_numeric_digit?(digit) do
+  def validate_numeric_digit?(digit) do
     case Integer.parse(digit) do
       {parsed_digit, _rest} ->
         {:ok, parsed_digit}
