@@ -6,7 +6,6 @@ defmodule BankValidatorBR do
   Documentation for `BankValidatorBR`.
   """
 
-
   @doc """
   is_valid
   Returns a boolean, after checking if the combination of bank_code, agency_number, account_number and digit is valid
