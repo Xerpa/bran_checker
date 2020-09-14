@@ -40,7 +40,8 @@ defmodule BankValidatorBR.Banks.Santander do
   def is_valid?(agency_number, account_number, digit) do
     with true <- is_valid_agency_number?(agency_number),
          true <- is_valid_account_number?(account_number),
-         true <- is_valid_account_type?(account_number) do
+         true <- is_valid_account_type?(account_number),
+         {:ok, parsed_digit} <- is_valid_numeric_digit?(digit) do
       full_account_number = agency_number ++ [0, 0] ++ account_number
 
       validating_digit =
@@ -49,7 +50,7 @@ defmodule BankValidatorBR.Banks.Santander do
         |> rem(10)
         |> calc_digit()
 
-      validating_digit == digit
+      validating_digit == parsed_digit
     else
       _ -> false
     end
