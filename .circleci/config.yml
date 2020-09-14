@@ -57,7 +57,7 @@ workflows:
                 - hexpm/elixir:1.10.4-erlang-23.0.3-alpine-3.12.0
       - publish_production_approval:
                 type: approval
-                filters:
+                # filters:
                   # branches:
                   #   only:
                   #     - master
@@ -65,7 +65,7 @@ workflows:
                   - build_and_test
       - publish:
                 context: xerpa
-                filters:
+                # filters:
                   # branches:
                   #   only:
                   #     - master
