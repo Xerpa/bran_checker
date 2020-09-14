@@ -2,10 +2,10 @@ defmodule BankValidatorBRTest do
   use ExUnit.Case
   use ExUnit.Parameterized
 
-  describe "is_valid/3" do
+  describe "validate/3" do
     test_with_params "returns {:ok, :valid} for valid accounts and digits with hyphen",
                      fn bank_code, agency, account ->
-                       assert BankValidatorBR.is_valid(bank_code, agency, account) ==
+                       assert BankValidatorBR.validate(bank_code, agency, account) ==
                                 {:ok, :valid}
                      end do
       [
@@ -20,7 +20,7 @@ defmodule BankValidatorBRTest do
 
     test_with_params "returns {:ok, :valid} for valid accounts and digits with no hyphen",
                      fn bank_code, agency, account ->
-                       assert BankValidatorBR.is_valid(bank_code, agency, account) ==
+                       assert BankValidatorBR.validate(bank_code, agency, account) ==
                                 {:ok, :valid}
                      end do
       [
@@ -34,10 +34,10 @@ defmodule BankValidatorBRTest do
     end
   end
 
-  describe "is_valid/4" do
+  describe "validate/4" do
     test_with_params "returns {:ok, :valid} when account is valid",
                      fn bank_code, agency, account, digit ->
-                       assert BankValidatorBR.is_valid(bank_code, agency, account, digit) ==
+                       assert BankValidatorBR.validate(bank_code, agency, account, digit) ==
                                 {:ok, :valid}
                      end do
       [
@@ -52,7 +52,7 @@ defmodule BankValidatorBRTest do
 
     test_with_params "returns {:error, :not_valid} when account isn't valid",
                      fn bank_code, agency, account, digit ->
-                       assert BankValidatorBR.is_valid(bank_code, agency, account, digit) ==
+                       assert BankValidatorBR.validate(bank_code, agency, account, digit) ==
                                 {:error, :not_valid}
                      end do
       [
