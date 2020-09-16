@@ -11,7 +11,7 @@ defmodule BRAN do
   Returns a tuple with {:ok, :valid} or {:error, :reason}, after checking if the combination of bank_code, agency_number, account_number and digit is valid
 
   ## Examples
-    iex> BRAN.is_valid?("341","2545", "02366", 1)
+    iex> BRAN.validate("341","2545", "02366", 1)
     {:ok, :valid}
   """
   @spec validate(String.t(), String.t(), String.t(), String.t() | Integer.t()) ::
