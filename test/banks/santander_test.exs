@@ -5,7 +5,7 @@ defmodule BRAN.Banks.SantanderTest do
   use ExUnit.Parameterized
 
   describe "BRAN.Banks.SantanderTest" do
-    test_with_params "should return true when the account is valid",
+    test_with_params "should return valid tuple when the account is valid",
                      fn agency, account, digit ->
                        assert Santander.validate(agency, account, digit) == {:ok, :valid}
                      end do

@@ -10,10 +10,10 @@ defmodule BRAN.Banks.Itau do
   @weigths [2, 1, 2, 1, 2, 1, 2, 1, 2]
 
   @doc """
-  Returns a boolean, after checking if the combination of agency_number, account_number and digit is valid
+  Returns a tuple, after checking if the combination of agency_number, account_number and digit is valid
 
   ##Examples
-    iex> BRAN.Itau.validate?([2,5,4,5], [0,2,3,6,6], 1)
+    iex> BRAN.Itau.validate([2,5,4,5], [0,2,3,6,6], 1)
     :true
   """
 
