@@ -13,7 +13,7 @@ defmodule BRAN.Banks.Itau do
   Returns a boolean, after checking if the combination of agency_number, account_number and digit is valid
 
   ##Examples
-    iex> BRAN.Itau.is_valid?([2,5,4,5], [0,2,3,6,6], 1)
+    iex> BRAN.Itau.validate?([2,5,4,5], [0,2,3,6,6], 1)
     :true
   """
 

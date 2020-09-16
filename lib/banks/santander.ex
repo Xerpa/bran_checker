@@ -33,7 +33,7 @@ defmodule BRAN.Banks.Santander do
   Returns a boolean, after checking if the combination of agency_number, account_number and digit is valid
 
   ##Examples
-    iex> BRAN.Santander.is_valid?([2,5,4,5], [0,2,3,6,6,0,2,3], 1)
+    iex> BRAN.Santander.validate?([2,5,4,5], [0,2,3,6,6,0,2,3], 1)
     :true
   """
   @spec validate([Integer.t()], Integer.t(), Integer.t() | String.t()) ::
