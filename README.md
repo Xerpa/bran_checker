@@ -26,7 +26,7 @@ by adding `bran` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:bran, "~> 0.1.0"}
+    {:bran, "~> 0.1.1"}
   ]
 end
 ```
