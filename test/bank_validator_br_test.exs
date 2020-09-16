@@ -5,8 +5,7 @@ defmodule BRANTest do
   describe "validate/3" do
     test_with_params "returns {:ok, :valid} for valid accounts and digits with hyphen",
                      fn bank_code, agency, account ->
-                       assert BRAN.validate(bank_code, agency, account) ==
-                                {:ok, :valid}
+                       assert BRAN.validate(bank_code, agency, account) == {:ok, :valid}
                      end do
       [
         {"341", "7062", "14945-0"},
@@ -20,8 +19,7 @@ defmodule BRANTest do
 
     test_with_params "returns {:ok, :valid} for valid accounts and digits with no hyphen",
                      fn bank_code, agency, account ->
-                       assert BRAN.validate(bank_code, agency, account) ==
-                                {:ok, :valid}
+                       assert BRAN.validate(bank_code, agency, account) == {:ok, :valid}
                      end do
       [
         {"341", "7062", "149450"},
@@ -37,8 +35,7 @@ defmodule BRANTest do
   describe "validate/4" do
     test_with_params "returns {:ok, :valid} when account is valid",
                      fn bank_code, agency, account, digit ->
-                       assert BRAN.validate(bank_code, agency, account, digit) ==
-                                {:ok, :valid}
+                       assert BRAN.validate(bank_code, agency, account, digit) == {:ok, :valid}
                      end do
       [
         {"341", "0658", "71228", 6},
