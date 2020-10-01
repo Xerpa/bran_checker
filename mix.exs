@@ -52,7 +52,8 @@ defmodule BRAN.MixProject do
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:junit_formatter, "~> 3.1", only: :test, runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
-      {:ex_parameterized, "~> 1.3", only: [:test]}
+      {:ex_parameterized, "~> 1.3", only: [:test]},
+      {:sobelow, "~> 0.10.4", only: :dev}
     ]
   end
 end

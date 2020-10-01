@@ -40,6 +40,14 @@ jobs:
       - run: mix deps.get
       - run: mix hex.publish --yes
 
+  sec_code_analysis:
+    docker:
+    - image: circleci/elixir:1.7.3
+
+    steps:
+      - checkout
+      - run: mix sobelow
+
 workflows:
   version: 2.1
   build_and_test:
@@ -54,6 +62,9 @@ workflows:
                 - hexpm/elixir:1.9.4-erlang-20.3.8.26-alpine-3.12.0
                 - hexpm/elixir:1.10.4-erlang-21.3.8.17-alpine-3.12.0
                 - hexpm/elixir:1.10.4-erlang-23.0.3-alpine-3.12.0
+      - sec_code_analysis:
+          requires:
+            - build_and_test
       - publish_production_approval:
           type: approval
           filters:
@@ -70,3 +81,4 @@ workflows:
                 - master
           requires:
             - publish_production_approval
+            - sec_code_analysis
