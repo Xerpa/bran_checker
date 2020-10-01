@@ -43,9 +43,17 @@ jobs:
   sec_code_analysis:
     docker:
     - image: circleci/elixir:1.7.3
+    environment:
+      MIX_ENV: dev
 
     steps:
-      - checkout
+      - attach_workspace: 
+          at: ~/
+      - run: 
+          name: Fetch dependencies
+          command: | 
+            mix local.hex --force
+            mix local.rebar --force
       - run: mix sobelow
 
 workflows:
