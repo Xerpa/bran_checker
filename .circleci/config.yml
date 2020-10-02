@@ -44,7 +44,7 @@ jobs:
     docker:
     - image: circleci/elixir:1.7.3
     environment:
-      MIX_ENV: dev
+      MIX_ENV: test
 
     steps:
       - attach_workspace: 
