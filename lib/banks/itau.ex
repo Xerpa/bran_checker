@@ -7,7 +7,7 @@ defmodule BRAN.Banks.Itau do
     Documentation `BRAN.Banks.Itau`
   """
 
-  @weigths [2, 1, 2, 1, 2, 1, 2, 1, 2]
+  @weigths [2, 1]
 
   @doc """
   Returns a tuple, after checking if the combination of agency_number, account_number and digit is valid
@@ -24,18 +24,15 @@ defmodule BRAN.Banks.Itau do
     with {:ok, :valid} <- validate_agency_code(agency_code),
          {:ok, :valid} <- validate_account_number(account_number),
          {:ok, parsed_digit} <- validate_numeric_digit?(digit) do
-      digit_result =
-        (agency_code ++ account_number)
-        |> DigitCalculator.mod(10, @weigths, true)
-        |> rem(10)
+      (agency_code ++ account_number)
+      |> DigitCalculator.mod(10, @weigths, &sum_digits/1)
+      |> case do
+        ^parsed_digit ->
+          {:ok, :valid}
 
-      if digit_result == parsed_digit do
-        {:ok, :valid}
-      else
-        {:error, :not_valid}
+        _ ->
+          {:error, :not_valid}
       end
-    else
-      result -> result
     end
   end
 
@@ -45,5 +42,9 @@ defmodule BRAN.Banks.Itau do
     else
       {:error, :invalid_account_number_length}
     end
+  end
+
+  defp sum_digits(stream) do
+    Stream.flat_map(stream, &Integer.digits/1)
   end
 end
