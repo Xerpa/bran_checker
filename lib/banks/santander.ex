@@ -7,7 +7,7 @@ defmodule BRAN.Banks.Santander do
     Documentation `BRAN.Banks.Santander`
   """
 
-  @weigths [9, 7, 3, 1, 0, 0, 9, 7, 1, 3, 1, 9, 7, 3]
+  @weigths [9, 7, 3, 1, 0, 0, 9, 7, 1, 3, 1]
   @account_types [
     "01",
     "02",
@@ -48,21 +48,15 @@ defmodule BRAN.Banks.Santander do
          {:ok, :valid} <- validate_account_number(account_number),
          {:ok, :valid} <- validate_account_type(account_number),
          {:ok, parsed_digit} <- validate_numeric_digit?(digit) do
-      full_account_number = agency_code ++ [0, 0] ++ account_number
+      (agency_code ++ [0, 0] ++ account_number)
+      |> DigitCalculator.mod(10, @weigths)
+      |> case do
+        ^parsed_digit ->
+          {:ok, :valid}
 
-      validating_digit =
-        full_account_number
-        |> DigitCalculator.calc_numbers(@weigths, false)
-        |> rem(10)
-        |> calc_digit()
-
-      if validating_digit == parsed_digit do
-        {:ok, :valid}
-      else
-        {:error, :not_valid}
+        _ ->
+          {:error, :not_valid}
       end
-    else
-      result -> result
     end
   end
 
@@ -86,7 +80,4 @@ defmodule BRAN.Banks.Santander do
       {:error, :invalid_account_type}
     end
   end
-
-  defp calc_digit(digit) when digit == 0, do: digit
-  defp calc_digit(digit), do: 10 - digit
 end

@@ -2,34 +2,23 @@ defmodule BRAN.DigitCalculator do
   @moduledoc """
   Documentation for `BRAN.DigitCalculator`.
   """
-  @spec calc_numbers([Integer.t()], [Integer.t()], Boolean.t()) :: Integer.t()
-  def calc_numbers(account_number, weights, sum_result_when_greater_than_9 \\ false) do
+  @spec mod([Integer.t()], Integer.t(), [Integer.t()], Function.t()) :: Integer.t()
+  def mod(full_account_number, mod_factor, weights, sum_digits \\ fn stream -> stream end) do
+    full_account_number
+    |> calc_numbers(weights, sum_digits)
+    |> rem(mod_factor)
+    |> (&(mod_factor - &1)).()
+    |> rem(mod_factor)
+  end
+
+  @spec calc_numbers([Integer.t()], [Integer.t()], Function.t()) :: Integer.t()
+  defp calc_numbers(account_number, weights, sum_digits) do
+    cycle = Stream.cycle(weights)
+
     account_number
-    |> Enum.zip(weights)
-    |> Enum.map(&calc_number_pair(&1, sum_result_when_greater_than_9))
+    |> Stream.zip(cycle)
+    |> Stream.map(fn {elem0, elem1} -> elem0 * elem1 end)
+    |> sum_digits.()
     |> Enum.sum()
   end
-
-  defp calc_number_pair(numbers, sum_result_when_greater_than_9) do
-    result = elem(numbers, 0) * elem(numbers, 1)
-
-    sum_result(result, sum_result_when_greater_than_9)
-  end
-
-  defp sum_result(result, sum_result_when_greater_than_9) when sum_result_when_greater_than_9 do
-    result
-    |> Integer.digits()
-    |> Enum.sum()
-  end
-
-  defp sum_result(result, _sum_result_when_greater_than_9), do: result
-
-  @spec mod([Integer.t()], Integer.t(), [Integer.t()], Boolean.t()) :: Integer.t()
-  def mod(full_account_number, mod_factor, weights, sum_result_when_greater_than_9 \\ false),
-    do:
-      mod_factor -
-        rem(
-          calc_numbers(full_account_number, weights, sum_result_when_greater_than_9),
-          mod_factor
-        )
 end
