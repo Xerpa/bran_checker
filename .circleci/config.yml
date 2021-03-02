@@ -28,6 +28,11 @@ jobs:
       - store_test_results: # upload junit test results for display in Test Summary
           path: _build/test/lib
       - run: mix credo
+      - run: 
+          name: Install and run sast
+          command: |
+            mix archive.install hex sobelow --force
+            mix sobelow
   publish:
     parallelism: 1
     docker:
