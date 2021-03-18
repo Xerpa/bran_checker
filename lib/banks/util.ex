@@ -21,6 +21,7 @@ defmodule BRAN.Banks.Util do
   @spec validate_numeric_digit?(String.t() | Integer.t()) ::
           {:not_valid, :non_numeric_digit} | {:ok, integer}
   def validate_numeric_digit?(digit) when is_integer(digit), do: {:ok, digit}
+  def validate_numeric_digit?(nil), do: {:not_valid, :non_numeric_digit}
 
   def validate_numeric_digit?(digit) do
     case Integer.parse(digit) do
