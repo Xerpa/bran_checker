@@ -26,11 +26,11 @@ defmodule BRAN.MixProject do
     ]
   end
 
-  defp description() do
+  defp description do
     "Elixir package to validate bank account numbers of Brazilian banks."
   end
 
-  defp package() do
+  defp package do
     [
       name: "bran",
       links: %{"GitHub" => "https://github.com/Xerpa/bran_checker"},
