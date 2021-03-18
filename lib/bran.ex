@@ -1,6 +1,7 @@
 defmodule BRAN do
   alias BRAN.Banks.C6
   alias BRAN.Banks.Itau
+  alias BRAN.Banks.Nubank
   alias BRAN.Banks.Santander
 
   @moduledoc """
@@ -37,6 +38,9 @@ defmodule BRAN do
 
       "336" ->
         C6.validate(parsed_agency_code, parsed_account_number, digit)
+
+      "260" ->
+        Nubank.validate(parsed_agency_code, parsed_account_number, digit)
 
       _ ->
         {:error, :not_supported}

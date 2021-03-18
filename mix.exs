@@ -53,7 +53,8 @@ defmodule BRAN.MixProject do
       {:junit_formatter, "~> 3.1", only: :test, runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
       {:ex_parameterized, "~> 1.3", only: [:dev, :test]},
-      {:sobelow, "~> 0.10.4", only: :dev}
+      {:sobelow, "~> 0.10.4", only: :dev},
+      {:verhoeff, "~> 0.1.2"}
     ]
   end
 end
