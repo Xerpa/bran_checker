@@ -18,7 +18,7 @@ defmodule BRAN.DigitCalculator do
     |> rem(mod_factor)
   end
 
-  @spec calc_numbers([Integer.t()], [Integer.t()], Function.t()) :: Integer.t()
+  @spec calc_numbers([integer()], [integer()], function()) :: integer()
   defp calc_numbers(account_number, weights, sum_digits) do
     cycle = Stream.cycle(weights)
 
