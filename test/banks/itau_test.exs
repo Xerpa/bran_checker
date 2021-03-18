@@ -4,10 +4,12 @@ defmodule BRAN.Banks.ItauTest do
   use ExUnit.Case
   use ExUnit.Parameterized
 
+  doctest BRAN.Banks.Itau
+
   describe "BRAN.Banks.ItauTest" do
     test_with_params "should return valid tuple when the account is valid",
-                     fn agency, account, digit ->
-                       assert Itau.validate(agency, account, digit) == {:ok, :valid}
+                     fn branch, account, digit ->
+                       assert Itau.validate(branch, account, digit) == {:ok, :valid}
                      end do
       [
         {[4, 3, 1, 3], [4, 3, 1, 2, 9], 0},
@@ -34,8 +36,8 @@ defmodule BRAN.Banks.ItauTest do
     end
 
     test_with_params "should return not_valid tuple when the account is valid",
-                     fn agency, account, digit ->
-                       assert Itau.validate(agency, account, digit) == {:error, :not_valid}
+                     fn branch, account, digit ->
+                       assert Itau.validate(branch, account, digit) == {:error, :not_valid}
                      end do
       [
         {[4, 3, 1, 3], [4, 3, 1, 2, 9], 9},
@@ -62,16 +64,16 @@ defmodule BRAN.Banks.ItauTest do
     end
 
     test(
-      "should return invalid_agency_code_length tuple when the agency number have less than 4 digits"
+      "should return invalid_bank_branch_length tuple when the branch number have less than 4 digits"
     ) do
-      assert Itau.validate([2, 5, 4], [0, 2, 3, 6, 6], 1) == {:error, :invalid_agency_code_length}
+      assert Itau.validate([2, 5, 4], [0, 2, 3, 6, 6], 1) == {:error, :invalid_bank_branch_length}
     end
 
     test(
-      "should return invalid_agency_code_length tuple when the agency number have more than 4 digits"
+      "should return invalid_bank_branch_length tuple when the branch number have more than 4 digits"
     ) do
       assert Itau.validate([2, 5, 4, 5, 5], [0, 2, 3, 6, 6], 1) ==
-               {:error, :invalid_agency_code_length}
+               {:error, :invalid_bank_branch_length}
     end
 
     test(

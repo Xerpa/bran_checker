@@ -19,16 +19,16 @@ defmodule BRAN.Banks.C6 do
     {:ok, :valid}
   """
 
-  @spec validate([Integer.t()], [Integer.t()], Integer.t() | String.t()) ::
+  @spec validate([integer()], [integer()], integer() | String.t()) ::
           {:error, :not_valid} | {:ok, :valid}
-  def validate(agency_code, account_number, digit) do
-    agency_code_string =
-      agency_code
+  def validate(bank_branch, account_number, digit) do
+    bank_branch_string =
+      bank_branch
       |> Enum.map(&Integer.to_string/1)
       |> Enum.join()
 
     with true <- Enum.all?(account_number, &validate_numeric_digit?/1) || {:error, :not_valid},
-         {:ok, :valid} <- validate_agency_by_example(agency_code_string),
+         {:ok, :valid} <- validate_branch_by_example(bank_branch_string),
          {:ok, parsed_digit} <- validate_numeric_digit?(digit) do
       account_number
       |> fill_with_zeros()

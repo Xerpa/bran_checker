@@ -2,10 +2,12 @@ defmodule BRANTest do
   use ExUnit.Case
   use ExUnit.Parameterized
 
+  doctest BRAN
+
   describe "validate/3" do
     test_with_params "returns {:ok, :valid} for valid accounts and digits with hyphen",
-                     fn bank_code, agency, account ->
-                       assert BRAN.validate(bank_code, agency, account) == {:ok, :valid}
+                     fn bank_code, branch, account ->
+                       assert BRAN.validate(bank_code, branch, account) == {:ok, :valid}
                      end do
       [
         {"341", "7062", "14945-0"},
@@ -25,8 +27,8 @@ defmodule BRANTest do
     end
 
     test_with_params "returns {:ok, :valid} for valid accounts and digits with no hyphen",
-                     fn bank_code, agency, account ->
-                       assert BRAN.validate(bank_code, agency, account) == {:ok, :valid}
+                     fn bank_code, branch, account ->
+                       assert BRAN.validate(bank_code, branch, account) == {:ok, :valid}
                      end do
       [
         {"341", "7062", "149450"},
@@ -48,8 +50,8 @@ defmodule BRANTest do
 
   describe "validate/4" do
     test_with_params "returns {:ok, :valid} when account is valid",
-                     fn bank_code, agency, account, digit ->
-                       assert BRAN.validate(bank_code, agency, account, digit) == {:ok, :valid}
+                     fn bank_code, branch, account, digit ->
+                       assert BRAN.validate(bank_code, branch, account, digit) == {:ok, :valid}
                      end do
       [
         {"341", "7062", "14945", 0},
@@ -69,8 +71,8 @@ defmodule BRANTest do
     end
 
     test_with_params "returns {:error, :not_valid} when account isn't valid",
-                     fn bank_code, agency, account, digit ->
-                       assert BRAN.validate(bank_code, agency, account, digit) ==
+                     fn bank_code, branch, account, digit ->
+                       assert BRAN.validate(bank_code, branch, account, digit) ==
                                 {:error, :not_valid}
                      end do
       [

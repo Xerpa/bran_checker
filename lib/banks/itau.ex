@@ -10,21 +10,21 @@ defmodule BRAN.Banks.Itau do
   @weigths [2, 1]
 
   @doc """
-  Returns a tuple, after checking if the combination of agency_number, account_number and digit is valid
+  Returns a tuple, after checking if the combination of branch_number, account_number and digit is valid
 
   ##Examples
-    iex> BRAN.Itau.validate([2,5,4,5], [0,2,3,6,6], 1)
+    iex> BRAN.Banks.Itau.validate([2,5,4,5], [0,2,3,6,6], 1)
     {:ok, :valid}
   """
 
-  @spec validate([Integer.t()], Integer.t(), Integer.t() | String.t()) ::
-          {:error, :invalid_account_number_length | :invalid_agency_code_length | :not_valid}
+  @spec validate([integer()], [integer()], integer() | String.t()) ::
+          {:error, :invalid_account_number_length | :invalid_bank_branch_length | :not_valid}
           | {:ok, :valid}
-  def validate(agency_code, account_number, digit) do
-    with {:ok, :valid} <- validate_agency_code(agency_code),
+  def validate(bank_branch, account_number, digit) do
+    with {:ok, :valid} <- validate_bank_branch(bank_branch),
          {:ok, :valid} <- validate_account_number(account_number),
          {:ok, parsed_digit} <- validate_numeric_digit?(digit) do
-      (agency_code ++ account_number)
+      (bank_branch ++ account_number)
       |> DigitCalculator.mod(10, @weigths, &sum_digits/1)
       |> case do
         ^parsed_digit ->
