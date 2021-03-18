@@ -17,11 +17,11 @@ defmodule BRAN.Banks.UtilTest do
   end
 
   describe "validate_agency_by_example/2" do
-    test_with_params "should validate agency code properly based on givn example", fn agency_code,
-                                                                                      example,
-                                                                                      expected_result ->
-      assert Util.validate_agency_by_example(agency_code, example) == expected_result
-    end do
+    test_with_params "should validate agency code properly based on givn example",
+                     fn agency_code, example, expected_result ->
+                       assert Util.validate_agency_by_example(agency_code, example) ==
+                                expected_result
+                     end do
       [
         {"0001", "0001", {:ok, :valid}},
         {"0001", "0002", {:error, :invalid_agency_code}},
