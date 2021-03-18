@@ -4,10 +4,12 @@ defmodule BRAN.Banks.C6Test do
   use ExUnit.Case
   use ExUnit.Parameterized
 
+  doctest BRAN.Banks.C6
+
   describe "BRAN.Banks.C6Test" do
     test_with_params "should return valid tuple when the account is valid",
-                     fn agency, account, digit ->
-                       assert C6.validate(agency, account, digit) == {:ok, :valid}
+                     fn branch, account, digit ->
+                       assert C6.validate(branch, account, digit) == {:ok, :valid}
                      end do
       [
         {[0, 0, 0, 1], [1, 5, 3, 8, 5, 6, 8], 0},
@@ -60,10 +62,10 @@ defmodule BRAN.Banks.C6Test do
       ]
     end
 
-    test_with_params "should return :invalid_agency_code tuple when the agency is not valid",
-                     fn agency, account, digit ->
-                       assert C6.validate(agency, account, digit) ==
-                                {:error, :invalid_agency_code}
+    test_with_params "should return :invalid_bank_branch tuple when the branch is not valid",
+                     fn branch, account, digit ->
+                       assert C6.validate(branch, account, digit) ==
+                                {:error, :invalid_bank_branch}
                      end do
       [
         {[4, 3, 1, 3], [4, 3, 1, 2, 9], 9},
@@ -80,8 +82,8 @@ defmodule BRAN.Banks.C6Test do
     end
 
     test_with_params "should return :not_valid tuple when the account is not valid",
-                     fn agency, account, digit ->
-                       assert C6.validate(agency, account, digit) == {:error, :not_valid}
+                     fn branch, account, digit ->
+                       assert C6.validate(branch, account, digit) == {:error, :not_valid}
                      end do
       [
         {[0, 0, 0, 1], [4, 3, 1, 2, 9], 9},

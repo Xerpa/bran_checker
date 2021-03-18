@@ -4,10 +4,12 @@ defmodule BRAN.Banks.SantanderTest do
   use ExUnit.Case
   use ExUnit.Parameterized
 
+  doctest BRAN.Banks.Santander
+
   describe "BRAN.Banks.SantanderTest" do
     test_with_params "should return valid tuple when the account is valid",
-                     fn agency, account, digit ->
-                       assert Santander.validate(agency, account, digit) == {:ok, :valid}
+                     fn branch, account, digit ->
+                       assert Santander.validate(branch, account, digit) == {:ok, :valid}
                      end do
       [
         {[0, 0, 9, 2], [4, 6, 5, 3, 5, 4, 9, 5], 0},
@@ -38,17 +40,17 @@ defmodule BRAN.Banks.SantanderTest do
     end
 
     test(
-      "should return invalid_agency_code_length tuple when the agency number have less than 4 digits"
+      "should return invalid_bank_branch_length tuple when the branch number have less than 4 digits"
     ) do
       assert Santander.validate([2, 5, 4], [0, 1, 0, 9, 8, 4, 8, 6], 1) ==
-               {:error, :invalid_agency_code_length}
+               {:error, :invalid_bank_branch_length}
     end
 
     test(
-      "should return invalid_agency_code_length tuple when the agency number have more than 4 digits"
+      "should return invalid_bank_branch_length tuple when the branch number have more than 4 digits"
     ) do
       assert Santander.validate([0, 0, 6, 0, 5], [0, 1, 0, 9, 8, 4, 8, 6], 1) ==
-               {:error, :invalid_agency_code_length}
+               {:error, :invalid_bank_branch_length}
     end
 
     test(

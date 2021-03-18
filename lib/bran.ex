@@ -10,37 +10,37 @@ defmodule BRAN do
 
   @doc """
   validate
-  Returns a tuple with {:ok, :valid} or {:error, :reason}, after checking if the combination of bank_code, agency_number, account_number and digit is valid
+  Returns a tuple with {:ok, :valid} or {:error, :reason}, after checking if the combination of bank_code, branch_number, account_number and digit is valid
 
   ## Examples
     iex> BRAN.validate("341","2545", "02366", 1)
     {:ok, :valid}
   """
-  @spec validate(String.t(), String.t(), String.t(), String.t() | Integer.t()) ::
+  @spec validate(String.t(), String.t(), String.t(), String.t() | integer()) ::
           {:error,
            :invalid_account_number_length
            | :invalid_account_type
-           | :invalid_agency_code_length
+           | :invalid_bank_branch_length
            | :not_supported
            | :not_valid}
           | {:ok, :valid}
-  def validate(bank_code, agency_code, account_number, digit) do
-    parsed_agency_code = parse_to_integer_list(agency_code)
+  def validate(bank_code, bank_branch, account_number, digit) do
+    parsed_bank_branch = parse_to_integer_list(bank_branch)
 
     parsed_account_number = parse_to_integer_list(account_number)
 
     case bank_code do
       "033" ->
-        Santander.validate(parsed_agency_code, parsed_account_number, digit)
+        Santander.validate(parsed_bank_branch, parsed_account_number, digit)
 
       "341" ->
-        Itau.validate(parsed_agency_code, parsed_account_number, digit)
+        Itau.validate(parsed_bank_branch, parsed_account_number, digit)
 
       "336" ->
-        C6.validate(parsed_agency_code, parsed_account_number, digit)
+        C6.validate(parsed_bank_branch, parsed_account_number, digit)
 
       "260" ->
-        Nubank.validate(parsed_agency_code, parsed_account_number, digit)
+        Nubank.validate(parsed_bank_branch, parsed_account_number, digit)
 
       _ ->
         {:error, :not_supported}
@@ -51,14 +51,14 @@ defmodule BRAN do
           {:error,
            :invalid_account_number_length
            | :invalid_account_type
-           | :invalid_agency_code_length
+           | :invalid_bank_branch_length
            | :not_supported
            | :not_valid}
           | {:ok, :valid}
-  def validate(bank_code, agency_code, account_with_digit) do
+  def validate(bank_code, bank_branch, account_with_digit) do
     {account, digit} = split_account_and_digit(account_with_digit)
 
-    validate(bank_code, agency_code, account, digit)
+    validate(bank_code, bank_branch, account, digit)
   end
 
   defp split_account_and_digit(account_with_digit) do

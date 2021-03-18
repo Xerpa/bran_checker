@@ -4,28 +4,30 @@ defmodule BRAN.Banks.UtilTest do
   use ExUnit.Case
   use ExUnit.Parameterized
 
-  describe "validate_agency_code/1" do
-    test_with_params "should validate agency code properly", fn agency_code, expected_result ->
-      assert Util.validate_agency_code(agency_code) == expected_result
+  doctest BRAN.Banks.Util
+
+  describe "validate_bank_branch/1" do
+    test_with_params "should validate branch code properly", fn bank_branch, expected_result ->
+      assert Util.validate_bank_branch(bank_branch) == expected_result
     end do
       [
         {[0, 0, 0, 1], {:ok, :valid}},
         {[1, 0, 0, 1], {:ok, :valid}},
-        {[0, 0, 1], {:error, :invalid_agency_code_length}}
+        {[0, 0, 1], {:error, :invalid_bank_branch_length}}
       ]
     end
   end
 
-  describe "validate_agency_by_example/2" do
-    test_with_params "should validate agency code properly based on givn example",
-                     fn agency_code, example, expected_result ->
-                       assert Util.validate_agency_by_example(agency_code, example) ==
+  describe "validate_branch_by_example/2" do
+    test_with_params "should validate branch code properly based on givn example",
+                     fn bank_branch, example, expected_result ->
+                       assert Util.validate_branch_by_example(bank_branch, example) ==
                                 expected_result
                      end do
       [
         {"0001", "0001", {:ok, :valid}},
-        {"0001", "0002", {:error, :invalid_agency_code}},
-        {"001", "0001", {:error, :invalid_agency_code}}
+        {"0001", "0002", {:error, :invalid_bank_branch}},
+        {"001", "0001", {:error, :invalid_bank_branch}}
       ]
     end
   end

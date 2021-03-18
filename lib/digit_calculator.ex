@@ -2,7 +2,7 @@ defmodule BRAN.DigitCalculator do
   @moduledoc """
   Documentation for `BRAN.DigitCalculator`.
   """
-  @spec mod([Integer.t()], Integer.t(), [Integer.t()], Function.t()) :: Integer.t()
+  @spec mod([integer()], integer(), [integer()], function()) :: integer()
   def mod(full_account_number, mod_factor, weights, sum_digits \\ fn stream -> stream end) do
     full_account_number
     |> calc_numbers(weights, sum_digits)

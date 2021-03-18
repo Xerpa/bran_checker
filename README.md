@@ -24,7 +24,7 @@ This rules are based on [this document](http://177.153.6.25/ercompany.com.br/bol
 ```elixir
 def deps do
   [
-    {:bran, "~> 0.2.0"}
+    {:bran, "~> 1.0.0"}
   ]
 end
 ```

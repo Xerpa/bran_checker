@@ -4,7 +4,7 @@ defmodule BRAN.MixProject do
   def project do
     [
       app: :bran,
-      version: "0.2.0",
+      version: "1.0.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -26,11 +26,11 @@ defmodule BRAN.MixProject do
     ]
   end
 
-  defp description() do
+  defp description do
     "Elixir package to validate bank account numbers of Brazilian banks."
   end
 
-  defp package() do
+  defp package do
     [
       name: "bran",
       links: %{"GitHub" => "https://github.com/Xerpa/bran_checker"},
