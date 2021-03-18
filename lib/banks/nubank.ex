@@ -17,19 +17,9 @@ defmodule BRAN.Banks.Nubank do
           {:error, :invalid_account_number_length | :invalid_agency_code_length | :not_valid}
           | {:ok, :valid}
   def validate(agency_code, account_number, digit) do
-    agency_code_string =
-      agency_code
-      |> Enum.map(&Integer.to_string/1)
-      |> Enum.join()
-
-    account_number_string =
-      account_number
-      |> Enum.map(&Integer.to_string/1)
-      |> Enum.join()
-
     with true <- Enum.all?(account_number, &validate_numeric_digit?/1) || {:error, :not_valid},
-         {:ok, parsed_account_number} <- validate_numeric_digit?(account_number_string),
-         {:ok, :valid} <- validate_agency_by_example(agency_code_string),
+         {:ok, parsed_account_number} <- validate_account_number(account_number),
+         {:ok, :valid} <- validate_agency(agency_code),
          {:ok, parsed_digit} <- validate_numeric_digit?(digit) do
       account_with_digit = String.to_integer("#{parsed_account_number}#{parsed_digit}")
 
@@ -43,5 +33,19 @@ defmodule BRAN.Banks.Nubank do
           {:error, :not_valid}
       end
     end
+  end
+
+  defp validate_account_number(account_number) do
+    account_number
+    |> Enum.map(&Integer.to_string/1)
+    |> Enum.join()
+    |> validate_numeric_digit?()
+  end
+
+  defp validate_agency(agency_code) do
+    agency_code
+    |> Enum.map(&Integer.to_string/1)
+    |> Enum.join()
+    |> validate_agency_by_example()
   end
 end
