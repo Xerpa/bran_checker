@@ -1,7 +1,7 @@
 defmodule BRAN do
+  alias BRAN.Banks.C6
   alias BRAN.Banks.Itau
   alias BRAN.Banks.Santander
-  alias BRAN.Banks.C6
 
   @moduledoc """
   Documentation for `BRAN`.

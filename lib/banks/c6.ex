@@ -30,7 +30,8 @@ defmodule BRAN.Banks.C6 do
     with true <- Enum.all?(account_number, &validate_numeric_digit?/1) || {:error, :not_valid},
          {:ok, :valid} <- validate_agency_by_example(agency_code_string),
          {:ok, parsed_digit} <- validate_numeric_digit?(digit) do
-      fill_with_zeros(account_number)
+      account_number
+      |> fill_with_zeros()
       |> DigitCalculator.mod_simple(11, @weigths)
       |> digit()
       |> case do
