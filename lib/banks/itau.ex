@@ -14,7 +14,7 @@ defmodule BRAN.Banks.Itau do
 
   ##Examples
     iex> BRAN.Itau.validate([2,5,4,5], [0,2,3,6,6], 1)
-    :true
+    {:ok, :valid}
   """
 
   @spec validate([Integer.t()], Integer.t(), Integer.t() | String.t()) ::

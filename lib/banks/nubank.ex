@@ -10,7 +10,7 @@ defmodule BRAN.Banks.Nubank do
 
   ##Examples
     iex> BRAN.Banks.Nubank.validate([0,0,0,1], [5,2,1,6,1,2,5], 0)
-    :true
+    {:ok, :valid}
   """
 
   @spec validate([Integer.t()], [Integer.t()], Integer.t() | String.t()) ::

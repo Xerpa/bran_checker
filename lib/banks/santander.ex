@@ -34,7 +34,7 @@ defmodule BRAN.Banks.Santander do
 
   ##Examples
     iex> BRAN.Santander.validate([2,5,4,5], [0,2,3,6,6,0,2,3], 1)
-    :true
+    {:ok, :valid}
   """
   @spec validate([Integer.t()], Integer.t(), Integer.t() | String.t()) ::
           {:error,

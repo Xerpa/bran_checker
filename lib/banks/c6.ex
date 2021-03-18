@@ -16,7 +16,7 @@ defmodule BRAN.Banks.C6 do
 
   ##Examples
     iex> BRAN.Banks.C6.validate([0,0,0,1], [1,7,9,2,7,0,6], 4)
-    :true
+    {:ok, :valid}
   """
 
   @spec validate([Integer.t()], [Integer.t()], Integer.t() | String.t()) ::
