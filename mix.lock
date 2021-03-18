@@ -20,4 +20,5 @@
   "sobelow": {:hex, :sobelow, "0.10.4", "44ba642da120d84fedb9e85473375084034330c8f15a992351dd164a82963103", [:mix], [], "hexpm", "fea62a94a4112de45ee9c9d076fd636fbbc10b7c7c2ea99a928e7c289b8498d1"},
   "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.6", "cf344f5692c82d2cd7554f5ec8fd961548d4fd09e7d22f5b62482e5aeaebd4b0", [:make, :mix, :rebar3], [], "hexpm", "bdb0d2471f453c88ff3908e7686f86f9be327d065cc1ec16fa4540197ea04680"},
   "unicode_util_compat": {:hex, :unicode_util_compat, "0.5.0", "8516502659002cec19e244ebd90d312183064be95025a319a6c7e89f4bccd65b", [:rebar3], [], "hexpm", "d48d002e15f5cc105a696cf2f1bbb3fc72b4b770a184d8420c8db20da2674b38"},
+  "verhoeff": {:hex, :verhoeff, "0.1.2", "4f80a701f57460503913caf6262f21c122d1d4bb04454e5fa4d934ae6154e749", [:rebar3], [], "hexpm", "1110f266fb3e2b69c7ba29cdae13e583f32af99e6a24843cefa04690c529e8f9"},
 }
