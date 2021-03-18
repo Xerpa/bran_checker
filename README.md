@@ -13,6 +13,7 @@ This rules are based on [this document](http://177.153.6.25/ercompany.com.br/bol
     -   Banco do Brasil
     -   Caixa Econômica Federal
     -   ~~Santander~~
+    -   ~~C6~~
 -   Create Hex.pm package
 -   Implement validator for other brazilian banks
 -   Improve documentations
